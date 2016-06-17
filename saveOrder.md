@@ -6,36 +6,38 @@ For any payment method, the function saveOrder must be called always on the Than
 
 For example, for online payment method, saveOrder function must be called after the response from the payment processor is received and the answer is positive (not error or fail). In this case it means the order is successfully registered (was paid). saveOrder function must be called on the Thank You page, when all the registration process of the order is over.
 
-	var _ra = _ra || {};
+    var _ra = _ra || {};
+
+    _ra.saveOrderInfo = {
+        "order_no": "unique_order_number",
+        "lastname": "buyer_last_name",
+        "firstname": "buyer_first_name",
+        "email": "buyer_email",
+        "phone": "buyer_phone",
+        "state": "buyer_state",
+        "city": "buyer_city",
+        "address": "buyer_address",
+        "discount_code": ["discount_code_1", "discount_code_2"],
+        "discount": total_discount_value,
+        "shipping": shipping_value,
+        "rebates": rebates_value_besides_discount,
+        "fees": fees_value_besides_shipping,
+        "total": total_order_value
+    };
+    
+    _ra.saveOrderProducts = [
+        {
+            "id": product_id,
+            "quantity": product_quantity,
+            "price": unit_product_price,
+            "variation_code": "product_variation_code"
+        },
+        ...
+    ];
 	
-	_ra.saveOrderInfo = {
-		"order_no": unique_order_number,
-		"lastname": "buyer_last_name",
-		"firstname": "buyer_first_name",
-		"email": "buyer_email",
-		"phone": "buyer_phone",
-		"state": "buyer_state",
-		"city": "buyer_city",
-		"address": "buyer_address",
-		"discount_code": "discount_code",
-		"discount": total_discount_value,
-		"shipping": shipping_value,
-		"total": total_order_value
-	};
-		
-	_ra.saveOrderProducts = [
-		{
-			"id": product_id,
-			"quantity": product_quantity,
-			"price": unit_product_price,
-			"variation_code": "product_variation_code"
-		},
-			...
-	];
-		
-	if( _ra.ready !== undefined ){
-		_ra.saveOrder(_ra.saveOrderInfo, _ra.saveOrderProducts);
-	}
+    if( _ra.ready !== undefined ){
+        _ra.saveOrder(_ra.saveOrderInfo, _ra.saveOrderProducts);
+    }
 	
 ##**saveOrder** function parameters
 
@@ -51,8 +53,10 @@ For example, for online payment method, saveOrder function must be called after 
 |  adress  |  Text  |  Required  |  buyer address  |
 |  discount  |  Number/0  |  Required  |  the amount / value by which the total amount was reduced. Note that we are not talking about the discount value (e.g. 10%), but the money amount (e.g. 5$ discount for a 100$ order). If there is no discount applied on the order, send value 0.  |
 |  discount_code  |  Text  |  Required  |  the discount code used when placing the order.  |
-|  shipping  |  Text  |  Required  |  value / amount paid for the shipping (shipping fee). If there is no shipping charge, send value 0.  |
-|  total  |  Text  |  Required  |  amount / total amount of payment for the order sent. Note that this the total amount the buyer actually pays, the amount obtained after applying any discount and/or shipping fee.  |
+|  shipping  |  Number or text  |  Required  |  value / amount paid for the shipping (shipping fee). If there is no shipping charge, send value 0.  |
+|  fees  |  Number or text  |  Required  |  value/amount paid for the fees. If there is no fees charge, send value 0.  |
+|  rebates  |  Number or text  |  Required  |  value/amount paid for the rebates. If there is no rebates charge, send value 0.  |
+|  total  |  Number or text  |  Required  |  amount / total amount of payment for the order sent. Note that this the total amount the buyer actually pays, the amount obtained after applying any discount and/or shipping fee.  |
 
 Products ordered are contained in the second parameter of the function, which is Array type. Details for each product are added in Array through an object that has the following properties: id, quantity, price, variation_code
 
