@@ -51,7 +51,7 @@
 
 |    **Parameter**    |    **Type**    |    **Required**    |    **Description**    |
 |---|---|---|---|
-|  id  |  Number or text  |  Required  |  The product id .  |
+|  id  |  Number or text  |  Required  |  The ID of the product .  |
 |  quantity  |  Number or text  |  Required  |  Product quantity.  |
 |	variation	|	Object / False	|	Required	|	object with details about chosen variation details for the product added to cart. If the product does not have variation send false value. The object containing the details of the chosen variation has the following properties: code, details	|
 |	variation.code	|	Text	|	Required	|	unique combination of properties that form the variation of product, separated by simple line (-). It is mandatory to use a simple dash (-) to separate the options of variation.	|
