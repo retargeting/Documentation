@@ -16,7 +16,7 @@ This function takes as a parameter an array containing all the IDs of the produc
 
 |    **Parameter**    |    **Type**    |    **Required**    |    **Description**    |
 |---|---|---|---|
-|  product_id  |  Number or text  |  Required  |  The product id .  |
+|  product_id  |  Array  |  Required  |  The product id .  |
 
 
 ##**checkoutIds function examples**
